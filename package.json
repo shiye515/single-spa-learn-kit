@@ -1,0 +1,24 @@
+{
+  "name": "single_spa",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "jiashuo <jiashuo@didichuxing.com>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "webpack-dev-server --mode=development",
+    "start": "npm run dev",
+    "lint": "eslint src",
+    "test": "jest",
+    "build": "webpack --mode=production"
+  },
+  "dependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "html-webpack-plugin": "^3.2.0",
+    "html-webpack-tags-plugin": "^2.0.17",
+    "systemjs": "^6.2.6",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <% for (var css in htmlWebpackPlugin.files.css) { %>
+    <link href="<%=htmlWebpackPlugin.files.css[css] %>" rel="stylesheet" />
+    <% } %>
+  </head>
+  <body>
+    <h1><%= htmlWebpackPlugin.options.foo %></h1>
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+    <script
+      type="text/javascript"
+      src="<%=htmlWebpackPlugin.files.chunks[chunk].entry %>"
+    ></script>
+    <% } %>
+    <script type="systemjs-importmap">
+      {
+        "imports": {
+          "main": "https://unpkg.com/lodash@4.17.10/lodash.js"
+        }
+      }
+    </script>
+    <script type="text/javascript" src="system.min.js"></script>
+    <script>
+      System.import("/js/main.js");
+    </script>
+  </body>
+</html>
