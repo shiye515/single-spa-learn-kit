@@ -9,28 +9,36 @@
     />
     <meta name="keywords" content="" />
     <meta name="description" content="" />
-    <% for (var css in htmlWebpackPlugin.files.css) { %>
-    <link href="<%=htmlWebpackPlugin.files.css[css] %>" rel="stylesheet" />
-    <% } %>
-  </head>
-  <body>
-    <h1><%= htmlWebpackPlugin.options.foo %></h1>
-    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
-    <script
-      type="text/javascript"
-      src="<%=htmlWebpackPlugin.files.chunks[chunk].entry %>"
-    ></script>
-    <% } %>
     <script type="systemjs-importmap">
       {
         "imports": {
-          "main": "https://unpkg.com/lodash@4.17.10/lodash.js"
+          "single-spa": "<%= webpackConfig.output.publicPath %>single-spa.js",
+          "single-spa-react": "<%= webpackConfig.output.publicPath %>single-spa-react.js",
+          "react": "<%= webpackConfig.output.publicPath %>react.js",
+          "react-dom": "<%= webpackConfig.output.publicPath %>react-dom.js",
+          "main": "<%= webpackConfig.output.publicPath %><%= webpackConfig.output.filename %>",
+          "app1": "<%= webpackConfig.output.publicPath %>app1.bundle.js",
+          "app2": "<%= webpackConfig.output.publicPath %>app2.bundle.js",
+          "app3": "<%= webpackConfig.output.publicPath %>app3.bundle.js"
         }
       }
     </script>
-    <script type="text/javascript" src="system.min.js"></script>
+    <script
+      type="text/javascript"
+      src="<%= webpackConfig.output.publicPath %>system.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="<%= webpackConfig.output.publicPath %>named-exports.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="<%= webpackConfig.output.publicPath %>use-default.js"
+    ></script>
+  </head>
+  <body>
     <script>
-      System.import("/js/main.js");
+      System.import('main');
     </script>
   </body>
 </html>
