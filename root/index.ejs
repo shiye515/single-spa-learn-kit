@@ -12,10 +12,9 @@
     <script type="systemjs-importmap">
       {
         "imports": {
-          "single-spa": "<%= webpackConfig.output.publicPath %>single-spa.js",
-          "single-spa-react": "<%= webpackConfig.output.publicPath %>single-spa-react.js",
-          "react": "<%= webpackConfig.output.publicPath %>react.js",
-          "react-dom": "<%= webpackConfig.output.publicPath %>react-dom.js",
+          "single-spa": "<%= webpackConfig.output.publicPath %>single-spa/single-spa<%= webpackConfig.mode=='production'?'.min':'.dev' %>.js",
+          "react": "<%= webpackConfig.output.publicPath %>react/react<%= webpackConfig.mode=='production'?'.production.min':'.development' %>.js",
+          "react-dom": "<%= webpackConfig.output.publicPath %>react-dom/react-dom<%= webpackConfig.mode=='production'?'.production.min':'.development' %>.js",
           "main": "<%= webpackConfig.output.publicPath %><%= webpackConfig.output.filename %>",
           "app1": "<%= webpackConfig.output.publicPath %>app1.bundle.js",
           "app2": "<%= webpackConfig.output.publicPath %>app2.bundle.js",
@@ -25,20 +24,21 @@
     </script>
     <script
       type="text/javascript"
-      src="<%= webpackConfig.output.publicPath %>system.js"
+      src="<%= webpackConfig.output.publicPath %>systemjs/system<%= webpackConfig.mode=='production'?'.min':'' %>.js"
     ></script>
     <script
       type="text/javascript"
-      src="<%= webpackConfig.output.publicPath %>named-exports.js"
+      src="<%= webpackConfig.output.publicPath %>systemjs/extras/named-exports<%= webpackConfig.mode=='production'?'.min':'' %>.js"
     ></script>
     <script
       type="text/javascript"
-      src="<%= webpackConfig.output.publicPath %>use-default.js"
+      src="<%= webpackConfig.output.publicPath %>systemjs/extras/use-default<%= webpackConfig.mode=='production'?'.min':'' %>.js"
     ></script>
   </head>
   <body>
+    <div><%= webpackConfig.mode %></div>
     <script>
-      System.import('main');
+      System.import("main");
     </script>
   </body>
 </html>

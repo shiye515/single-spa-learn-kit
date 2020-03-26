@@ -1,33 +1,42 @@
 // import React, { Component } from 'react';
-// import Dom from 'react-dom';
-// import bar from './bar';
-// import { registerApplication, start } from 'single-spa';
-// console.log(bar, Component, React);
-// console.log(registerApplication, start);
-// console.log(Dom);
-// export default bar;
 
-import { registerApplication, start } from 'single-spa';
-// console.log(registerApplication);
-// console.log(start);
+import { registerApplication, start } from "single-spa";
+import dva from "dva";
+
+const app = dva();
+app.model({
+  namespace: "count",
+  state: 0,
+  reducers: {
+    add(count) {
+      return count + 1;
+    },
+    minus(count) {
+      return count - 1;
+    }
+  }
+});
 registerApplication(
-  'app1',
-  () => System.import('app1'),
-  () => true
+  "app1",
+  () => System.import("app1"),
+  () => true,
+  { dva: app }
 );
 registerApplication(
-  'app2',
-  () => System.import('app2'),
+  "app2",
+  () => System.import("app2"),
   location => {
-    return location.hash.indexOf('#/app2') === 0;
-  }
+    return location.hash.indexOf("#/app2") === 0;
+  },
+  { dva: app }
 );
 registerApplication(
-  'app3',
-  () => System.import('app3'),
+  "app3",
+  () => System.import("app3"),
   location => {
-    return location.hash.indexOf('#/app3') === 0;
-  }
+    return location.hash.indexOf("#/app3") === 0;
+  },
+  { dva: app }
 );
 // registerApplication(
 //   '@react-mf/navbar',
